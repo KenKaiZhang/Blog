@@ -6,11 +6,11 @@ Given the root of a binary search tree, and an integer `k`, return the `k`<sup>t
 
 ## Concept
 
-Easiest method would be to recursively travers through the tree, put values in an array and return the `k`<sup>th</sup> element.
-
-The better solution is to iterativly navigate throught the tree. Start with an empty stack and a pointer to `root`. Move as far left as possible while adding items to the stack. Once it is not possible to move further left, pop from the stack (these will all be the left most values). Keep track of how many values were popped since the number of values popped is similar as to adding a number to the array from left to right. After removing an item from the stack, move the pointer to its right and continue the loop (move to the right because the first pop from the stack will be the far most left item or the smallest item and anything to the right of it will be the next smallest). Once `k` items were popped, whatever node currently on is the solution.
+Basically choose a preferred method of traversing the BST in order and when `k` is 0, return the current node's value.
 
 ## Code
+
+**_Iterative_**
 
 ```python
 class Solution:
@@ -18,13 +18,43 @@ class Solution:
         stack = []
         cur = root
 
-        while stack and cur:
-            while cur:
+        while True:
+            if cur:
                 stack.append(cur)
                 cur = cur.left
-            cur = stack.pop()
-            k -= 1
-            if k == 0:
-                return cur.val
-            cur = cur.right
+            elif stack:
+                cur = stack.pop()
+                k -= 1
+                if k == 0:
+                    return cur.val
+                cur = cur.right
+            else:
+                return
+``
+```
+
+**_Recursively_**
+
+```python
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+
+        index = 0
+        res = 0
+
+        def traverse(root):
+            nonlocal index
+            nonlocal res
+            if not root:
+                return None
+
+            traverse(root.left)
+            index += 1
+            if index == k:
+                res = root.val
+                return
+            traverse(root.right)
+
+        traverse(root)
+        return(res)
 ```
