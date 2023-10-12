@@ -56,11 +56,11 @@ class Solution:
         cur = head
         while cur:
             copy = oldToCopy[cur]
-            copy.next = oldToCopy[cur.next]
-            copy.random = oldToCopy[cur.random]
+            copy.next = oldToCopy[cur.next] if cur.next else None
+            copy.random = oldToCopy[cur.random] if cur.random else None
             cur = cur.next
 
-        return oldToCopy[head]
+        return oldToCopy[head] if head else None
 ```
 
 **Constant Space**

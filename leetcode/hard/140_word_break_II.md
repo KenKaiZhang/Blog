@@ -44,6 +44,22 @@ _Note: a memo can help remember any previously seen combinations_
 
 ## Code
 
+**Based on problem 139**
+
+```python
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        dp = [[] for _ in range(len(s) + 1)]
+        dp[-1] = [""]
+
+        for i in range(len(s)-1, -1, -1):
+            for word in wordDict:
+                if ((i + len(word)) <= len(s)) and s[i:i+len(word)] == word:
+                    for post in dp[i+len(word)]:
+                        dp[i].append(word + (" " if post else "") + post)
+        return dp[0]
+```
+
 **Without memo**
 
 ```python
