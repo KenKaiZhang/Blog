@@ -59,3 +59,5 @@ $$d/dwJ(w,b) = 1/m \sum(f_w,_b(x^i) - y^i)x^i$$
 $$d/dbJ(w,b) = 1/m \sum(f_w,_b(x^i) - y^i)$$
 
 **Convex function** will always have one GLOBAL minimum
+
+**Batch gradient descent** - each step of gradient descent uses all the training examples
