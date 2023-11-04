@@ -87,3 +87,19 @@ class Solution:
 ```
 
 _Note `lowB` indicates the next potential spot for values less than `pivot` and `i` from the for loop indicates the part of the array being traversed_
+
+_Apparently QuickSelect is too slow and we need to use a minheap_
+
+```python
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        heap = nums[:k]     # Only keep at most k since that would indicate heap[0] to be kth largest
+        heap.heapify(heap)  # Basically sorts the array in ascending order
+
+        for num in nums[k:]:
+            # If the number is bigger than the current "answer" add it to the heap (remember it will always be in order since its a heap)
+            if num > heap[0]:
+                heap.heappop(heap)
+                heap.heappush(heap, num)
+        return heap[0]
+```
