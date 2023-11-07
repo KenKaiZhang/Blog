@@ -106,3 +106,5 @@ Set up environment variables that you want to set up on start up in **~/.profile
 ## `sh` Scripting
 
 Always start with a **`#!/bin/sh` (shebang)** which indicates the file to be script interpreted by bash
+
+Usually needs to be given execution permissions and then called with **`sh scriptname`**
